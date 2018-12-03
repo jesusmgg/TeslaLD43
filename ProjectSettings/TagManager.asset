@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FishSchool
   - Wall
+  - Enemy
+  - Dock
   layers:
   - Default
   - TransparentFX

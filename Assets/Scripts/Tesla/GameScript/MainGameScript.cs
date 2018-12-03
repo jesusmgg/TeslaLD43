@@ -51,6 +51,14 @@ namespace Tesla.GameScript
             
             else if (gameState == GameState.Returning)
             {
+                if (playerGameScript.isDocked)
+                {
+                    gameState = GameState.Selling;
+                }
+            }
+            
+            else if (gameState == GameState.Selling)
+            {
                 
             }
         }

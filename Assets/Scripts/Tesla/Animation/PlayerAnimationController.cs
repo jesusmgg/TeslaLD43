@@ -1,3 +1,4 @@
+using System;
 using Tesla.CharacterControllers;
 using Tesla.GameScript;
 using UnityEngine;
@@ -17,7 +18,6 @@ namespace Tesla.Animation
         public bool flipX;
 
         public float failSinkDistance;
-        public float totalSinkDistance;
 
         float previousWaterLevel;
 
@@ -48,15 +48,18 @@ namespace Tesla.Animation
                 animator.SetTrigger("Pull");
             }
             
-            float yPosition = transform.position.y + (previousWaterLevel - gameScript.waterLevel) * failSinkDistance;
-            float waterMaskYPosition = waterMask.transform.localPosition.y +
-                                       (-previousWaterLevel + gameScript.waterLevel) * failSinkDistance;
+            // Sinking
+            float sinking = (previousWaterLevel - gameScript.waterLevel) * failSinkDistance;
+            
+            float yPosition = transform.position.y + sinking;
+            float waterMaskYPosition = waterMask.transform.localPosition.y - sinking;
             
             transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
             waterMask.transform.localPosition = new Vector3(waterMask.transform.localPosition.x, 
                 waterMaskYPosition, waterMask.transform.localPosition.z);
 
-            previousWaterLevel = gameScript.waterLevel;
+            previousWaterLevel = gameScript.waterLevel;   
+            
         }
     }
 }

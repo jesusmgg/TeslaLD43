@@ -49,9 +49,12 @@ namespace Tesla.GameScript
 
         void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject == currentPlayer.gameObject)
+            if (other.gameObject.CompareTag("Player"))
             {
-                currentPlayer = null;
+                if (other.gameObject == currentPlayer.gameObject)
+                {
+                    currentPlayer = null;
+                }
             }
         }
     }

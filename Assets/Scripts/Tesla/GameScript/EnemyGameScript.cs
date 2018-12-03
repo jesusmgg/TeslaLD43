@@ -1,3 +1,4 @@
+using System.Collections;
 using Pixelplacement;
 using Tesla.CharacterControllers;
 using UnityEngine;
@@ -9,6 +10,10 @@ namespace Tesla.GameScript
         MainGameScript mainGameScript;
 
         EnemyCharacterController characterController;
+
+        public float damage = 0.1f;
+        
+        public bool canDamage;
 
         public EnemyState state;
 
@@ -48,6 +53,26 @@ namespace Tesla.GameScript
                     ? EnemyState.Idle
                     : EnemyState.Defeated;
             }
+
+            if (state == EnemyState.Idle)
+            {
+                canDamage = true;
+            }
+        }
+        
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                // Can't damage anymore this round
+                StartCoroutine(StopDamaging(0.5f));
+            }
+        }
+
+        IEnumerator StopDamaging(float delay = 0.0f)
+        {
+            yield return new WaitForSeconds(delay);
+            canDamage = false;
         }
     }
 

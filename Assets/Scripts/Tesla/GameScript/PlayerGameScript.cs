@@ -9,13 +9,15 @@ namespace Tesla.GameScript
     {
         MouseControls controls;
         FishMeterNeedle fishMeterNeedle;
-        
+
+        MainGameScript mainGameScript;
         FishSchoolGameScript currentFishSchool;
 
         public float fishingMeterTolerance = 0.2f;
         public float weightDamageFactor = 8.0f;
         
         public bool isFishing;
+        public bool isDocked;
         
         public float currentWeight;
         public float currentDamage;
@@ -27,6 +29,8 @@ namespace Tesla.GameScript
         {
             controls = GetComponent<MouseControls>();
             fishMeterNeedle = FindObjectOfType<FishMeterNeedle>();
+
+            mainGameScript = FindObjectOfType<MainGameScript>();
             
             currentFishSchool = null;
 
@@ -52,6 +56,29 @@ namespace Tesla.GameScript
             {
                 Sink();
             }
+
+            waterLevel = Mathf.Clamp(waterLevel, 0.0f, 2.7f);
+        }
+        
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                EnemyGameScript enemy = other.gameObject.GetComponent<EnemyGameScript>();
+
+                if (enemy.canDamage)
+                {
+                    currentDamage += enemy.damage;    
+                }
+            }
+            
+            else if (other.gameObject.CompareTag("Dock"))
+            {
+                if (mainGameScript.gameState == GameState.Returning)
+                {
+                    isDocked = true;    
+                }
+            }
         }
 
         void OnCollisionStay2D(Collision2D other)
@@ -64,7 +91,7 @@ namespace Tesla.GameScript
 
         void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject != null)
+            if (other.gameObject.CompareTag("FishSchool"))
             {
                 if (currentFishSchool != null)
                 {
