@@ -1,15 +1,19 @@
 fileFormatVersion: 2
-guid: ffea40a085be9f643b9ecb4e4994d33f
+guid: 17d171842d05ba949acbe4ba7e5ebb7c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: FishSchool_0
-    21300002: FishSchool_1
-    21300004: FishSchool_2
-    21300006: FishSchool_3
-    21300008: FishSchool_4
-    21300010: FishSchool_5
-    21300012: FishSchool_6
-    21300014: FishSchool_7
+    21300000: EnemyAttack_0
+    21300002: EnemyAttack_1
+    21300004: EnemyAttack_2
+    21300006: EnemyAttack_3
+    21300008: EnemyAttack_4
+    21300010: EnemyAttack_5
+    21300012: EnemyAttack_6
+    21300014: EnemyAttack_7
+    21300016: EnemyAttack_8
+    21300018: EnemyAttack_9
+    21300020: EnemyAttack_10
+    21300022: EnemyAttack_11
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -114,161 +118,241 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FishSchool_0
+      name: EnemyAttack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8126cd25e890e33429f1315a5c349d77
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a71cc83fdb8dd04b9d0d95a2398233f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c169fe08157ee14dbebf68d4254434d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 256
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57a3c0dbc6e36874bbe2a8f0bd747872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55a42427ed34f7f4a8d9502a789c2355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1daa3c7db454fdf4caa21f27e46472db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 127
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86e270b9ec6786044b1e19d07ca3ad3c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_7
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 128
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0.55, y: 0.7}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec096ea86e6c2d459cc898e687f3e88
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyAttack_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 192
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89c4bf93a8b96034abd699d323824240
+      spriteID: c1164fee8fdd2a8438b6bc41ffec30f3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_1
+      name: EnemyAttack_9
       rect:
         serializedVersion: 2
-        x: 256
+        x: 192
         y: 0
-        width: 256
-        height: 256
+        width: 192
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc993e31aa9746c4a8b50d04ff79acb8
+      spriteID: 0833fc73349ed2149b70f8702f004225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_2
+      name: EnemyAttack_10
       rect:
         serializedVersion: 2
-        x: 512
+        x: 384
         y: 0
-        width: 256
-        height: 256
+        width: 192
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2b58df4257e47b4dafc4030a80c67e4
+      spriteID: 6df14486eedb80245897b77f82d342e7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_3
+      name: EnemyAttack_11
       rect:
         serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256
-        height: 256
+        x: 576
+        y: 1
+        width: 192
+        height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86fd5154920dd4e42abc626fda9ba729
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FishSchool_4
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ce06421f9645db4cb64ca8aebc514d7
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FishSchool_5
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2ababe9aa62fb4848846bdf6d64460d2
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FishSchool_6
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdc219576396a4045a1499e839bfb0fd
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FishSchool_7
-      rect:
-        serializedVersion: 2
-        x: 1792
-        y: 0
-        width: 256
-        height: 256
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e17665245e7c5a4685cff11b9adec21
+      spriteID: 3e6d4a80f32cad5448bbe44be9550349
       vertices: []
       indices: 
       edges: []
@@ -276,7 +360,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2f020eab81f69a04a85df237f21b773e
+    spriteID: 5ddea1857aaf6b24d848a2845e6e94b7
     vertices: []
     indices: 
     edges: []

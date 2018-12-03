@@ -11,8 +11,16 @@ namespace Tesla.GameScript
         FishMeterNeedle fishMeterNeedle;
         
         FishSchoolGameScript currentFishSchool;
+
+        public float fishingMeterTolerance = 0.2f;
+        public float weightDamageFactor = 8.0f;
         
         public bool isFishing;
+        
+        public float currentWeight;
+        public float currentDamage;
+        public float waterLevel;  // When equal to 1.0f, player sinks
+        
         public FishSchoolGameScript lastFishedSchool;
 
         void Start()
@@ -21,16 +29,28 @@ namespace Tesla.GameScript
             fishMeterNeedle = FindObjectOfType<FishMeterNeedle>();
             
             currentFishSchool = null;
+
+            currentWeight = 0.0f;
         }
 
         void Update()
         {
             if (currentFishSchool != null)
             {
-                if (!isFishing)
+                if (!isFishing && lastFishedSchool != currentFishSchool)
                 {
                     StartCoroutine(StartFishing());
                 }
+            }
+
+            if (currentDamage > 0.0f)
+            {
+                waterLevel += (currentDamage + currentWeight / weightDamageFactor) * Time.deltaTime;    
+            }
+
+            if (waterLevel >= 1.0f)
+            {
+                Sink();
             }
         }
 
@@ -44,10 +64,21 @@ namespace Tesla.GameScript
 
         void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject == currentFishSchool.gameObject)
+            if (other.gameObject != null)
             {
-                currentFishSchool = null;
+                if (currentFishSchool != null)
+                {
+                    if (other.gameObject == currentFishSchool.gameObject)
+                    {
+                        currentFishSchool = null;
+                    }   
+                }
             }
+        }
+
+        void Sink()
+        {
+            Debug.Log("SINK");
         }
 
         IEnumerator StartFishing()
@@ -55,7 +86,16 @@ namespace Tesla.GameScript
             isFishing = true;
             
             yield return new WaitUntil(() => controls.GetMouseButtonDown(0));
-            Debug.Log(fishMeterNeedle.GetNormalizedValue());
+
+            if (Mathf.Abs(fishMeterNeedle.GetNormalizedValue()) <= fishingMeterTolerance)
+            {
+                currentWeight += currentFishSchool.weight;
+                Debug.Log($"Successfully fished a {currentFishSchool.weight}kg. fish!");
+            }
+            else
+            {
+                Debug.Log($"Failed to fished a {currentFishSchool.weight}kg. fish");
+            }
             
             isFishing = false;
             lastFishedSchool = currentFishSchool;

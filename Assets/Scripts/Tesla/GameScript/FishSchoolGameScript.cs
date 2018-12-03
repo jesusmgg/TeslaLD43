@@ -6,11 +6,15 @@ namespace Tesla.GameScript
     {
         public bool isHighlighted;
 
+        public float weight;
+
         PlayerGameScript currentPlayer;
 
         void Start()
         {
             currentPlayer = null;
+
+            weight = Random.Range(0.2f, 1.0f);
         }
 
         void Update()

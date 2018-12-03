@@ -8,6 +8,7 @@ namespace Tesla.CharacterControllers
     public class PlayerCharacterController : BaseCharacterController
     {
         public float speed = 2.0f;
+        public float weightSlowdownFactor = 8.0f;
 
         public Vector2 direction;
 
@@ -38,11 +39,22 @@ namespace Tesla.CharacterControllers
                 Tween.Stop(transform.GetInstanceID());
             }
         }
+        
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Wall"))
+            {
+                Tween.Stop(transform.GetInstanceID());
+                MoveTo((Vector2) transform.position - direction);
+            }
+        }
 
         void MoveTo(Vector2 destination)
         {
+            float trueSpeed = speed - gameScript.currentWeight / weightSlowdownFactor;
+            
             float distance = Vector3.Distance(transform.position, destination);
-            float time = distance / speed;
+            float time = distance / trueSpeed;
 
             Tween.Position(transform, transform.position, destination, time, 0.0f, Tween.EaseInOut);
 

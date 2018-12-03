@@ -1,3 +1,4 @@
+using System.Collections;
 using Tesla.GameScript;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ namespace Tesla.UI
         int rotationDirection = 1;
 
         bool isVisible;
+        Coroutine hidingCoroutine;
 
         void Start()
         {
@@ -25,8 +27,8 @@ namespace Tesla.UI
             //meterImage = GetComponentInParent<Image>();
 
             playerGameScript = FindObjectOfType<PlayerGameScript>();
-            
-            Hide();
+
+            hidingCoroutine = StartCoroutine(Hide());
         }
 
         void Update()
@@ -47,12 +49,20 @@ namespace Tesla.UI
             }
             else
             {
-                if (isVisible) {Hide();}
+                if (isVisible)
+                {
+                    hidingCoroutine = StartCoroutine(Hide(0.7f));
+                }
             }
         }
 
         void Show()
         {
+            if (hidingCoroutine != null)
+            {
+                StopCoroutine(hidingCoroutine);
+            }
+            
             transform.Rotate(0.0f, 0.0f, maxRotationAngle);
             currentRotation = maxRotationAngle;
             rotationDirection = 1;
@@ -62,8 +72,9 @@ namespace Tesla.UI
 
             isVisible = true;
         }
-        void Hide()
+        IEnumerator Hide(float delay=0.0f)
         {
+            yield return new WaitForSeconds(delay);
             needleImage.color = Color.clear;
             meterImage.color = Color.clear;
 

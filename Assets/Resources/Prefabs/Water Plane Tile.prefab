@@ -223,21 +223,23 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292603061272368}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e92dd9541d2c0384e859d85943f17ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: {x: 0.05, y: 0.07}
+  material: {fileID: 0}
 --- !u!114 &114616442237929590
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1831439108045988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e92dd9541d2c0384e859d85943f17ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: {x: -0.02, y: -0.01}
+  material: {fileID: 0}

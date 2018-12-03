@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FishSchool
+  - Wall
   layers:
   - Default
   - TransparentFX

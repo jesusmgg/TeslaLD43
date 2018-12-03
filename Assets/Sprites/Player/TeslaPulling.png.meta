@@ -1,15 +1,18 @@
 fileFormatVersion: 2
-guid: ffea40a085be9f643b9ecb4e4994d33f
+guid: 0dec8d64cb50c2341b47ab7fd8249a94
 TextureImporter:
   fileIDToRecycleName:
-    21300000: FishSchool_0
-    21300002: FishSchool_1
-    21300004: FishSchool_2
-    21300006: FishSchool_3
-    21300008: FishSchool_4
-    21300010: FishSchool_5
-    21300012: FishSchool_6
-    21300014: FishSchool_7
+    21300000: TeslaPulling_0
+    21300002: TeslaPulling_1
+    21300004: TeslaPulling_2
+    21300006: TeslaPulling_3
+    21300008: TeslaPulling_4
+    21300010: TeslaPulling_5
+    21300012: TeslaPulling_6
+    21300014: TeslaPulling_7
+    21300016: TeslaPulling_8
+    21300018: TeslaPulling_9
+    21300020: TeslaPulling_10
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -68,7 +71,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -79,7 +82,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -90,7 +93,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -101,7 +104,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -114,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FishSchool_0
+      name: TeslaPulling_0
       rect:
         serializedVersion: 2
         x: 0
@@ -122,19 +125,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89c4bf93a8b96034abd699d323824240
+      spriteID: c1c6484b404e3de4482dc4bc2ba2d2c2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_1
+      name: TeslaPulling_1
       rect:
         serializedVersion: 2
         x: 256
@@ -142,19 +145,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc993e31aa9746c4a8b50d04ff79acb8
+      spriteID: a0dc65515b1de194aafb6d318e4b01f3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_2
+      name: TeslaPulling_2
       rect:
         serializedVersion: 2
         x: 512
@@ -162,19 +165,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2b58df4257e47b4dafc4030a80c67e4
+      spriteID: 22ddde4c87a522d44af431aed68b7425
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_3
+      name: TeslaPulling_3
       rect:
         serializedVersion: 2
         x: 768
@@ -182,19 +185,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86fd5154920dd4e42abc626fda9ba729
+      spriteID: b8984ad6ff9fb2944ae47388ec1e877d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_4
+      name: TeslaPulling_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -202,19 +205,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ce06421f9645db4cb64ca8aebc514d7
+      spriteID: 544a2193349545a43a8f0a49dad135f4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_5
+      name: TeslaPulling_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -222,19 +225,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ababe9aa62fb4848846bdf6d64460d2
+      spriteID: d367fac02777f5043ad8305953dde4bb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_6
+      name: TeslaPulling_6
       rect:
         serializedVersion: 2
         x: 1536
@@ -242,19 +245,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdc219576396a4045a1499e839bfb0fd
+      spriteID: 24e585f50097738478fdee9859e84990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FishSchool_7
+      name: TeslaPulling_7
       rect:
         serializedVersion: 2
         x: 1792
@@ -262,13 +265,73 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.5, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e17665245e7c5a4685cff11b9adec21
+      spriteID: 636e10327ff72ea40a074b6715a87d11
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeslaPulling_8
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baf4a5145c2c7af4f86dad39f58173bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeslaPulling_9
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99c8c1aac7dee7f499c2f7e3b7e6d090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeslaPulling_10
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0228a43c2924b2b4c838dd4e07860c11
       vertices: []
       indices: 
       edges: []
@@ -276,7 +339,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2f020eab81f69a04a85df237f21b773e
+    spriteID: d37c5a4e9fa063540a2c57c0f2ebc77b
     vertices: []
     indices: 
     edges: []
