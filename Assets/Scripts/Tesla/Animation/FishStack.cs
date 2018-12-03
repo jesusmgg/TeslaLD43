@@ -14,6 +14,8 @@ namespace Tesla.Animation
         public SpriteMask spriteMask;
         public List<Sprite> sprites;
 
+        public bool hasMouseOver;
+
         float originalX;
 
         void Start()
@@ -24,6 +26,23 @@ namespace Tesla.Animation
             renderer = GetComponent<SpriteRenderer>();
 
             originalX = transform.localPosition.x;
+
+            hasMouseOver = false;
+        }
+
+        void OnMouseEnter()
+        {
+            if (playerGameScript.currentWeight > 0.1f)
+            {
+                hasMouseOver = true;
+                GetComponent<SpriteOutline>().isHighlighted = true;    
+            }
+        }
+        
+        void OnMouseExit()
+        {
+            hasMouseOver = false;
+            GetComponent<SpriteOutline>().isHighlighted = false;
         }
 
         void Update()
@@ -33,17 +52,17 @@ namespace Tesla.Animation
                 renderer.sprite = sprites[0];
             }
 
-            else if (playerGameScript.currentWeight <= 1.5f)
+            else if (playerGameScript.currentWeight <= 0.1f)
             {
                 renderer.sprite = sprites[1];
             }
 
-            else if (playerGameScript.currentWeight <= 4.0f)
+            else if (playerGameScript.currentWeight <= 2.0f)
             {
                 renderer.sprite = sprites[2];
             }
 
-            else if (playerGameScript.currentWeight <= 8.0f)
+            else if (playerGameScript.currentWeight <= 6.0f)
             {
                 renderer.sprite = sprites[3];
             }

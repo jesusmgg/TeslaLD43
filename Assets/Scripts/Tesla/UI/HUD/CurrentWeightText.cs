@@ -2,18 +2,16 @@ using Tesla.GameScript;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tesla.UI
+namespace Tesla.UI.HUD
 {
-    public class GameStateText : MonoBehaviour
+    public class CurrentWeightText : MonoBehaviour
     {
-        MainGameScript mainGameScript;
         PlayerGameScript playerGameScript;
 
         Text text;
 
         void Start()
         {
-            mainGameScript = FindObjectOfType<MainGameScript>();
             playerGameScript = FindObjectOfType<PlayerGameScript>();
 
             text = GetComponent<Text>();
@@ -21,10 +19,7 @@ namespace Tesla.UI
 
         void Update()
         {
-            if (mainGameScript.gameState == GameState.Fishing)
-            {
-                text.text = $"Fishing: {mainGameScript.fishingTimeLeft:F1}s";
-            }
+            text.text = $"Weight: {playerGameScript.currentWeight:F2}kg.";
         }
     }
 }

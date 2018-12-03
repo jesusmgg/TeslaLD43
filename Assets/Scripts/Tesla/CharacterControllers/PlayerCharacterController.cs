@@ -34,24 +34,38 @@ namespace Tesla.CharacterControllers
             if (mainGameScript.gameState == GameState.Fishing)
             {
                 currentAnimationCurve = Tween.EaseInOut;
-            }
-            else 
-            {
-                currentAnimationCurve = Tween.EaseOut;
+                
+                if (!gameScript.isFishing)
+                {
+                    if (controls.GetMouseButtonDown(0))
+                    {
+                        MoveTo(controls.GetMouseWorldPosition(), currentAnimationCurve);
+                    }    
+                }
+
+                // Take away control is player is fishing
+                if (gameScript.isFishing)
+                {
+                    Tween.Stop(transform.GetInstanceID());
+                }
             }
             
-            // Take away control is player is fishing
-            if (!gameScript.isFishing)
+            else if (mainGameScript.gameState == GameState.Returning) 
             {
+                currentAnimationCurve = Tween.EaseOut;
+                
                 if (controls.GetMouseButtonDown(0))
                 {
                     MoveTo(controls.GetMouseWorldPosition(), currentAnimationCurve);
-                }    
+                }
             }
-
-            if (gameScript.isFishing)
+            
+            else if (mainGameScript.gameState == GameState.Selling) 
             {
-                Tween.Stop(transform.GetInstanceID());
+            }
+            
+            else if (mainGameScript.gameState == GameState.Menu) 
+            {
             }
         }
         

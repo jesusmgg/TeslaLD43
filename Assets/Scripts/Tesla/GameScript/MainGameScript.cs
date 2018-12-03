@@ -1,14 +1,22 @@
 using System.Collections.Generic;
-using System.Linq;
+using Tesla.UI;
+using Tesla.UI.MainMenu;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Tesla.GameScript
 {
     public class MainGameScript : BaseGameScript
     {
         PlayerGameScript playerGameScript;
-        
-        public GameState gameState = GameState.Fishing;
+        InfoPanel infoPanel;
+        MainMenu mainMenu;
+
+        public GameState gameState;
+
+        public int currentDay;
+        public int money;
+        public string playerName = "Tesla";
 
         [Header("Fishing")]
         public GameObject fishSchoolPrefab;
@@ -17,18 +25,48 @@ namespace Tesla.GameScript
         public float fishingTimeLeft;
         GameObject currentFishSchool;
 
+        int tutorialProgress;
+
         void Start()
         {
             playerGameScript = FindObjectOfType<PlayerGameScript>();
+            infoPanel = FindObjectOfType<InfoPanel>();
+            mainMenu = FindObjectOfType<MainMenu>();
+
+            gameState = GameState.Menu;
             
             fishingTimeLeft = fishingTime;
             currentFishSchool = null;
+
+            tutorialProgress = 0;
+            
+            currentDay = 0;
+            money = 0;
+        }
+
+        void Reset()
+        {
+            tutorialProgress = 0;
+            
+            currentDay = 0;
+            money = 0;
         }
 
         void Update()
         {
             if (gameState == GameState.Fishing)
             {
+                if (currentDay == 0)
+                {
+                    if (tutorialProgress == 0)
+                    {
+                        string message = "Day 1 of 3\n\nClick on a fish school to start fishing.";
+                        infoPanel.AddMessage(message);
+
+                        tutorialProgress = 1;
+                    }   
+                }
+                
                 fishingTimeLeft -= Time.deltaTime;
 
                 if (fishingTimeLeft <= 0.0f)
@@ -51,6 +89,20 @@ namespace Tesla.GameScript
             
             else if (gameState == GameState.Returning)
             {
+                if (currentDay == 0)
+                {
+                    if (tutorialProgress == 1)
+                    {
+                        string message = "Return to the dock to sell your fish.\n\nBeware the crocodiles at the river.";
+                        infoPanel.AddMessage(message);
+                    
+                        message = "Drop fish by clicking them in your boat\n(to move faster and delay sinking).";
+                        infoPanel.AddMessage(message);
+
+                        tutorialProgress = 2;
+                    }
+                }
+                
                 if (playerGameScript.isDocked)
                 {
                     gameState = GameState.Selling;
@@ -59,7 +111,17 @@ namespace Tesla.GameScript
             
             else if (gameState == GameState.Selling)
             {
+                money += (int) (playerGameScript.currentWeight * 10.0f);
+                currentDay++;
                 
+            }
+            
+            else if (gameState == GameState.Menu)
+            {
+                if (mainMenu.startClicked)
+                {
+                    gameState = GameState.Fishing;
+                }
             }
         }
     }

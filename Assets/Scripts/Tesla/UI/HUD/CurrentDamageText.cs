@@ -2,9 +2,9 @@ using Tesla.GameScript;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tesla.UI
+namespace Tesla.UI.HUD
 {
-    public class CurrentWeightText : MonoBehaviour
+    public class CurrentDamageText : MonoBehaviour
     {
         PlayerGameScript playerGameScript;
 
@@ -19,7 +19,8 @@ namespace Tesla.UI
 
         void Update()
         {
-            text.text = $"Current weight: {playerGameScript.currentWeight:F2}kg.";
+            int damage = (int) (playerGameScript.currentDamage * 100.0f);
+            text.text = $"Damage: {damage}%";
         }
     }
 }

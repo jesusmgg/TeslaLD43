@@ -1,4 +1,5 @@
 using System.Collections;
+using Tesla.Animation;
 using Tesla.Controls;
 using Tesla.UI;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Tesla.GameScript
 
         MainGameScript mainGameScript;
         FishSchoolGameScript currentFishSchool;
+        FishStack fishStack;
 
         public float fishingMeterTolerance = 0.2f;
         public float weightDamageFactor = 8.0f;
@@ -22,6 +24,8 @@ namespace Tesla.GameScript
         public float currentWeight;
         public float currentDamage;
         public float waterLevel;  // When equal to 1.0f, player sinks
+
+        public string tooltipText;  // Set to empty string to hide tooltip
         
         public FishSchoolGameScript lastFishedSchool;
 
@@ -31,6 +35,7 @@ namespace Tesla.GameScript
             fishMeterNeedle = FindObjectOfType<FishMeterNeedle>();
 
             mainGameScript = FindObjectOfType<MainGameScript>();
+            fishStack = GetComponentInChildren<FishStack>();
             
             currentFishSchool = null;
 
@@ -58,6 +63,12 @@ namespace Tesla.GameScript
             }
 
             waterLevel = Mathf.Clamp(waterLevel, 0.0f, 2.7f);
+
+            tooltipText = "";
+            if (fishStack.hasMouseOver)
+            {
+                tooltipText = "Drop some fish to move faster and delay sinking";
+            }
         }
         
         void OnCollisionEnter2D(Collision2D other)
@@ -114,14 +125,17 @@ namespace Tesla.GameScript
             
             yield return new WaitUntil(() => controls.GetMouseButtonDown(0));
 
-            if (Mathf.Abs(fishMeterNeedle.GetNormalizedValue()) <= fishingMeterTolerance)
+            if (currentFishSchool != null)
             {
-                currentWeight += currentFishSchool.weight;
-                Debug.Log($"Successfully fished a {currentFishSchool.weight}kg. fish!");
-            }
-            else
-            {
-                Debug.Log($"Failed to fished a {currentFishSchool.weight}kg. fish");
+                if (Mathf.Abs(fishMeterNeedle.GetNormalizedValue()) <= fishingMeterTolerance)
+                {
+                    currentWeight += currentFishSchool.weight;
+                    Debug.Log($"Successfully fished a {currentFishSchool.weight}kg. fish!");
+                }
+                else
+                {
+                    Debug.Log($"Failed to fished a {currentFishSchool.weight}kg. fish");
+                }
             }
             
             isFishing = false;
