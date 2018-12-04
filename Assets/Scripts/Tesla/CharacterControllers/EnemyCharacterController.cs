@@ -7,6 +7,7 @@ namespace Tesla.CharacterControllers
 {
     public class EnemyCharacterController : BaseCharacterController
     {
+        MainGameScript mainGameScript;
         EnemyGameScript gameScript;
 
         public Vector2 point1;
@@ -19,14 +20,19 @@ namespace Tesla.CharacterControllers
 
         public TweenBase currentTween;
 
+        bool hasResetOnFishing;
+
         void Start()
         {
+            mainGameScript = FindObjectOfType<MainGameScript>();
             gameScript = GetComponent<EnemyGameScript>();
 
-            Reset();
+            hasResetOnFishing = false;
+
+            ResetValues();
         }
 
-        void Reset()
+        void ResetValues()
         {
             transform.position = point1;
             currentTarget = point2;
@@ -34,11 +40,33 @@ namespace Tesla.CharacterControllers
 
         void Update()
         {
+            if (mainGameScript.gameState == GameState.Fishing)
+            {
+                if (!hasResetOnFishing)
+                {
+                    currentTween?.Stop();
+                    ResetValues();
+
+                    hasResetOnFishing = true;
+                }
+            }
+            else if (mainGameScript.gameState == GameState.Returning)
+            {
+                hasResetOnFishing = false;
+            }
+            else if (mainGameScript.gameState == GameState.Selling)
+            {
+                hasResetOnFishing = false;
+            }
+            else if (mainGameScript.gameState == GameState.Menu)
+            {
+                hasResetOnFishing = false;
+            }
             
             if (gameScript.state == EnemyState.Hungry)
             {
                 currentTween?.Stop();
-                Reset();
+                ResetValues();
                 Move(transform.position, point2);
             }
             else if (gameScript.state == EnemyState.Attacking)

@@ -17,17 +17,19 @@ namespace Tesla.GameScript
 
         public float fishingMeterTolerance = 0.2f;
         public float weightDamageFactor = 8.0f;
-        
+
         public bool isFishing;
         public bool isDocked;
-        
+
         public float currentWeight;
         public float currentDamage;
-        public float waterLevel;  // When equal to 1.0f, player sinks
+        public float waterLevel; // When equal to 1.0f, player sinks
 
-        public string tooltipText;  // Set to empty string to hide tooltip
-        
+        public string tooltipText; // Set to empty string to hide tooltip
+
         public FishSchoolGameScript lastFishedSchool;
+
+        bool newDay;
 
         void Start()
         {
@@ -36,58 +38,85 @@ namespace Tesla.GameScript
 
             mainGameScript = FindObjectOfType<MainGameScript>();
             fishStack = GetComponentInChildren<FishStack>();
-            
+
             currentFishSchool = null;
 
             currentWeight = 0.0f;
+
+            newDay = false;
+        }
+
+        void ResetValues()
+        {
+            currentWeight = 0.0f;
+            currentDamage = 0.0f;
+            waterLevel = 0.0f;
         }
 
         void Update()
         {
-            if (currentFishSchool != null)
+            if (mainGameScript.gameState == GameState.Fishing || mainGameScript.gameState == GameState.Returning)
             {
-                if (!isFishing && lastFishedSchool != currentFishSchool)
+                if (newDay)
                 {
-                    StartCoroutine(StartFishing());
+                    ResetValues();
+                    newDay = false;
+                }
+
+                if (currentFishSchool != null)
+                {
+                    if (!isFishing && lastFishedSchool != currentFishSchool)
+                    {
+                        StartCoroutine(StartFishing());
+                    }
+                }
+
+                if (currentDamage > 0.0f)
+                {
+                    waterLevel += (currentDamage + currentWeight / weightDamageFactor) * Time.deltaTime;
+                }
+
+                if (waterLevel >= 1.0f)
+                {
+                    Sink();
+                }
+
+                waterLevel = Mathf.Clamp(waterLevel, 0.0f, 2.7f);
+
+                tooltipText = "";
+                if (fishStack.hasMouseOver)
+                {
+                    tooltipText = "Drop some fish to move faster and delay sinking";
                 }
             }
 
-            if (currentDamage > 0.0f)
+            else if (mainGameScript.gameState == GameState.Selling)
             {
-                waterLevel += (currentDamage + currentWeight / weightDamageFactor) * Time.deltaTime;    
+                newDay = true;
             }
 
-            if (waterLevel >= 1.0f)
+            else if (mainGameScript.gameState == GameState.Menu)
             {
-                Sink();
-            }
-
-            waterLevel = Mathf.Clamp(waterLevel, 0.0f, 2.7f);
-
-            tooltipText = "";
-            if (fishStack.hasMouseOver)
-            {
-                tooltipText = "Drop some fish to move faster and delay sinking";
+                newDay = true;
             }
         }
-        
+
         void OnCollisionEnter2D(Collision2D other)
+
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
                 EnemyGameScript enemy = other.gameObject.GetComponent<EnemyGameScript>();
-
                 if (enemy.canDamage)
                 {
-                    currentDamage += enemy.damage;    
+                    currentDamage += enemy.damage;
                 }
             }
-            
             else if (other.gameObject.CompareTag("Dock"))
             {
                 if (mainGameScript.gameState == GameState.Returning)
                 {
-                    isDocked = true;    
+                    isDocked = true;
                 }
             }
         }
@@ -109,8 +138,12 @@ namespace Tesla.GameScript
                     if (other.gameObject == currentFishSchool.gameObject)
                     {
                         currentFishSchool = null;
-                    }   
+                    }
                 }
+            }
+            else if (other.gameObject.CompareTag("Dock"))
+            {
+                isDocked = false;
             }
         }
 
@@ -122,25 +155,22 @@ namespace Tesla.GameScript
         IEnumerator StartFishing()
         {
             isFishing = true;
-            
             yield return new WaitUntil(() => controls.GetMouseButtonDown(0));
-
             if (currentFishSchool != null)
             {
                 if (Mathf.Abs(fishMeterNeedle.GetNormalizedValue()) <= fishingMeterTolerance)
                 {
                     currentWeight += currentFishSchool.weight;
-                    Debug.Log($"Successfully fished a {currentFishSchool.weight}kg. fish!");
+                    Debug.Log($"Successfully fished a {currentFishSchool.weight:F2}kg. fish!");
                 }
                 else
                 {
-                    Debug.Log($"Failed to fished a {currentFishSchool.weight}kg. fish");
+                    Debug.Log($"Failed to fished a {currentFishSchool.weight:F2}kg. fish");
                 }
             }
-            
+
             isFishing = false;
             lastFishedSchool = currentFishSchool;
-
             yield return null;
         }
     }

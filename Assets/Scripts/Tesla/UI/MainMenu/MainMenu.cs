@@ -1,5 +1,6 @@
 using Tesla.GameScript;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Tesla.UI.MainMenu
 {
@@ -16,7 +17,7 @@ namespace Tesla.UI.MainMenu
             startClicked = false;
         }
 
-        void Reset()
+        void ResetValues()
         {
             startClicked = false;
         }
@@ -24,6 +25,20 @@ namespace Tesla.UI.MainMenu
         public void OnStartButton()
         {
             startClicked = true;
+        }
+        
+        public void SetVisible(bool visible)
+        {
+            float alpha = visible ? 1.0f : 0.0f;
+            
+            foreach (Text text in GetComponentsInChildren<Text>())
+            {
+                text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+            }
+            foreach (Image image in GetComponentsInChildren<Image>())
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+            }
         }
 
         void Update()

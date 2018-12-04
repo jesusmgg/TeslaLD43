@@ -18,6 +18,9 @@ namespace Tesla.CharacterControllers
         MainGameScript mainGameScript;
 
         AnimationCurve currentAnimationCurve;
+        Vector3 startingPosition;
+        
+        bool newDay;
 
         void Start()
         {
@@ -27,12 +30,28 @@ namespace Tesla.CharacterControllers
             mainGameScript = FindObjectOfType<MainGameScript>();
             
             direction = Vector2.right;
+            
+            startingPosition = transform.position;
+
+            newDay = false;
+        }
+
+        void ResetValues()
+        {
+            transform.position = startingPosition;
+
+            newDay = false;
         }
 
         void Update()
         {
             if (mainGameScript.gameState == GameState.Fishing)
             {
+                if (newDay)
+                {
+                    ResetValues();
+                }
+                
                 currentAnimationCurve = Tween.EaseInOut;
                 
                 if (!gameScript.isFishing)
@@ -60,12 +79,14 @@ namespace Tesla.CharacterControllers
                 }
             }
             
-            else if (mainGameScript.gameState == GameState.Selling) 
+            else if (mainGameScript.gameState == GameState.Selling)
             {
+                newDay = true;
             }
             
             else if (mainGameScript.gameState == GameState.Menu) 
             {
+                newDay = true;
             }
         }
         

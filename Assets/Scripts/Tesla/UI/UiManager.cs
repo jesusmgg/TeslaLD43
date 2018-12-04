@@ -1,4 +1,5 @@
 using Tesla.GameScript;
+using Tesla.UI.HUD;
 using UnityEngine;
 
 namespace Tesla.UI
@@ -7,9 +8,9 @@ namespace Tesla.UI
     {
         MainGameScript mainGameScript;
 
-        public GameObject hudPanel;
-        public GameObject sellingPanel;
-        public GameObject mainMenuPanel;
+        public HudPanel hudPanel;
+        public SellingPanel sellingPanel;
+        public MainMenu.MainMenu mainMenuPanel;
 
         void Start()
         {
@@ -20,27 +21,27 @@ namespace Tesla.UI
         {
             if (mainGameScript.gameState == GameState.Fishing)
             {
-                hudPanel.SetActive(true);
-                sellingPanel.SetActive(false);
-                mainMenuPanel.SetActive(false);
+                hudPanel.SetVisible(true);
+                sellingPanel.SetVisible(false);
+                mainMenuPanel.SetVisible(false);
             }
             else if (mainGameScript.gameState == GameState.Returning)
             {
-                hudPanel.SetActive(true);
-                sellingPanel.SetActive(false);
-                mainMenuPanel.SetActive(false);
+                hudPanel.SetVisible(true);
+                sellingPanel.SetVisible(false);
+                mainMenuPanel.SetVisible(false);
             }
             else if (mainGameScript.gameState == GameState.Selling)
             {
-                hudPanel.SetActive(false);
-                sellingPanel.SetActive(true);
-                mainMenuPanel.SetActive(false);
+                hudPanel.SetVisible(false);
+                sellingPanel.SetVisible(true);
+                mainMenuPanel.SetVisible(false);
             }
             else if (mainGameScript.gameState == GameState.Menu)
             {
-                hudPanel.SetActive(false);
-                sellingPanel.SetActive(false);
-                mainMenuPanel.SetActive(true);
+                hudPanel.SetVisible(false);
+                sellingPanel.SetVisible(false);
+                mainMenuPanel.SetVisible(true);
             }
         }
     }

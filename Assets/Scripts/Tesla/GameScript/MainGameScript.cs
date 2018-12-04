@@ -10,6 +10,7 @@ namespace Tesla.GameScript
     {
         PlayerGameScript playerGameScript;
         InfoPanel infoPanel;
+        SellingPanel sellingPanel;
         MainMenu mainMenu;
 
         public GameState gameState;
@@ -26,11 +27,13 @@ namespace Tesla.GameScript
         GameObject currentFishSchool;
 
         int tutorialProgress;
+        bool endOfDayDone;
 
         void Start()
         {
             playerGameScript = FindObjectOfType<PlayerGameScript>();
             infoPanel = FindObjectOfType<InfoPanel>();
+            sellingPanel = FindObjectOfType<SellingPanel>();
             mainMenu = FindObjectOfType<MainMenu>();
 
             gameState = GameState.Menu;
@@ -39,17 +42,20 @@ namespace Tesla.GameScript
             currentFishSchool = null;
 
             tutorialProgress = 0;
+            endOfDayDone = false;
             
             currentDay = 0;
             money = 0;
         }
 
-        void Reset()
+        void ResetValues()
         {
             tutorialProgress = 0;
             
             currentDay = 0;
             money = 0;
+            
+            fishingTimeLeft = fishingTime;
         }
 
         void Update()
@@ -111,9 +117,30 @@ namespace Tesla.GameScript
             
             else if (gameState == GameState.Selling)
             {
-                money += (int) (playerGameScript.currentWeight * 10.0f);
-                currentDay++;
-                
+                if (!endOfDayDone)
+                {
+                    money += (int) (playerGameScript.currentWeight * 10.0f);
+                    currentDay++;
+
+                    endOfDayDone = true;
+                }
+
+                if (sellingPanel.nextDayClicked)
+                {
+                    if (currentDay > 2)
+                    {
+                        // End game
+                        gameState = GameState.Menu;
+                        ResetValues();
+                    }
+                    else
+                    {
+                        gameState = GameState.Fishing;  
+                        fishingTimeLeft = fishingTime;
+                    }
+                    
+                    endOfDayDone = false;
+                }
             }
             
             else if (gameState == GameState.Menu)

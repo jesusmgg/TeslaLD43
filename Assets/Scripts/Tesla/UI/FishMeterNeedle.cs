@@ -10,6 +10,7 @@ namespace Tesla.UI
         Image needleImage;
         public Image meterImage;
 
+        MainGameScript mainGameScript;
         PlayerGameScript playerGameScript;
 
         public float speed = 10.0f;
@@ -26,6 +27,7 @@ namespace Tesla.UI
             needleImage = GetComponent<Image>();
             //meterImage = GetComponentInParent<Image>();
 
+            mainGameScript = FindObjectOfType<MainGameScript>();
             playerGameScript = FindObjectOfType<PlayerGameScript>();
 
             hidingCoroutine = StartCoroutine(Hide());
@@ -33,25 +35,54 @@ namespace Tesla.UI
 
         void Update()
         {
-            if (playerGameScript.isFishing)
+            if (mainGameScript.gameState == GameState.Fishing)
             {
-                if (!isVisible) {Show();}
-                
-                if (Mathf.Abs(currentRotation) >= maxRotationAngle)
+                if (playerGameScript.isFishing)
                 {
-                    rotationDirection *= -1;
+                    if (!isVisible)
+                    {
+                        Show();
+                    }
+
+                    if (Mathf.Abs(currentRotation) >= maxRotationAngle)
+                    {
+                        rotationDirection *= -1;
+                    }
+
+                    currentRotation += rotationDirection * speed * Time.deltaTime;
+                    currentRotation = Mathf.Clamp(currentRotation, -maxRotationAngle, maxRotationAngle);
+
+                    transform.eulerAngles =
+                        new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, currentRotation);
                 }
-            
-                currentRotation += rotationDirection * speed * Time.deltaTime;
-                currentRotation = Mathf.Clamp(currentRotation, -maxRotationAngle, maxRotationAngle);
-            
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, currentRotation);   
+                else
+                {
+                    if (isVisible)
+                    {
+                        hidingCoroutine = StartCoroutine(Hide(0.7f));
+                    }
+                }  
             }
-            else
+            
+            else if (mainGameScript.gameState == GameState.Menu)
             {
                 if (isVisible)
                 {
-                    hidingCoroutine = StartCoroutine(Hide(0.7f));
+                    hidingCoroutine = StartCoroutine(Hide());
+                }
+            }
+            else if (mainGameScript.gameState == GameState.Selling)
+            {
+                if (isVisible)
+                {
+                    hidingCoroutine = StartCoroutine(Hide());
+                }
+            }
+            else if (mainGameScript.gameState == GameState.Returning)
+            {
+                if (isVisible)
+                {
+                    hidingCoroutine = StartCoroutine(Hide());
                 }
             }
         }

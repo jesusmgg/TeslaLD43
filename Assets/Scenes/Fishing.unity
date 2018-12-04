@@ -3599,6 +3599,7 @@ GameObject:
   - component: {fileID: 387982756}
   - component: {fileID: 387982755}
   - component: {fileID: 387982754}
+  - component: {fileID: 387982757}
   m_Layer: 0
   m_Name: SellingPanel
   m_TagString: Untagged
@@ -3662,6 +3663,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0000076293945, y: -0.00000095367}
   m_SizeDelta: {x: 303.44, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &387982757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 387982753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6a3a7846274f2f91c9f485868fae87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 1285010608}
+  fishedText: {fileID: 1499829171}
+  moneyText: {fileID: 1342089924}
+  buttonText: {fileID: 1899793274}
+  nextDayClicked: 0
 --- !u!1001 &485834132
 Prefab:
   m_ObjectHideFlags: 0
@@ -5222,7 +5239,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1203677393}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 387982757}
+        m_MethodName: OnNextDayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1203677393
@@ -5488,7 +5516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350027885}
   - component: {fileID: 1350027886}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fish Stack Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20829,7 +20857,7 @@ GameObject:
   - component: {fileID: 1552511427}
   - component: {fileID: 1552511429}
   - component: {fileID: 1552511428}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Water Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21016,6 +21044,7 @@ MonoBehaviour:
   gameState: 0
   currentDay: 0
   money: 0
+  playerName: 
   fishSchoolPrefab: {fileID: 1787539653018538, guid: c74956261a566214ca2c05414cad06fb,
     type: 2}
   fishSchoolPositions:
@@ -21672,9 +21701,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9fb8d5befe42e9b192fefad925c9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudPanel: {fileID: 2120060202}
-  sellingPanel: {fileID: 387982753}
-  mainMenuPanel: {fileID: 87728642}
+  hudPanel: {fileID: 2120060206}
+  sellingPanel: {fileID: 387982757}
+  mainMenuPanel: {fileID: 87728646}
 --- !u!1 &2083502740
 GameObject:
   m_ObjectHideFlags: 0
@@ -21847,6 +21876,7 @@ GameObject:
   - component: {fileID: 2120060205}
   - component: {fileID: 2120060204}
   - component: {fileID: 2120060203}
+  - component: {fileID: 2120060206}
   m_Layer: 0
   m_Name: HUDPanel
   m_TagString: Untagged
@@ -21909,3 +21939,14 @@ RectTransform:
   m_AnchoredPosition: {x: 63.63, y: -37.23}
   m_SizeDelta: {x: 127.26, y: 74.48}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2120060206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2120060202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961c6706672d4075b942c6db861b3140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
