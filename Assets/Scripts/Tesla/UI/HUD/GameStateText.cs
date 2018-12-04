@@ -23,14 +23,10 @@ namespace Tesla.UI.HUD
         {
             if (mainGameScript.gameState == GameState.Fishing)
             {
-                text.fontSize = 14;
-                text.color = Color.yellow;
                 text.text = $"Fishing: {mainGameScript.fishingTimeLeft:F1}s";
             }
             else if (mainGameScript.gameState == GameState.Returning)
             {
-                text.fontSize = 12;
-                text.color = Color.green;
                 text.text = "Return to the dock!";
             }
         }

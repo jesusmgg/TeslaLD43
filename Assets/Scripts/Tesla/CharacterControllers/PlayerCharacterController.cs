@@ -14,12 +14,12 @@ namespace Tesla.CharacterControllers
 
         MouseControls controls;
         PlayerGameScript gameScript;
-        
+
         MainGameScript mainGameScript;
 
         AnimationCurve currentAnimationCurve;
         Vector3 startingPosition;
-        
+
         bool newDay;
 
         void Start()
@@ -28,9 +28,9 @@ namespace Tesla.CharacterControllers
             gameScript = GetComponent<PlayerGameScript>();
 
             mainGameScript = FindObjectOfType<MainGameScript>();
-            
+
             direction = Vector2.right;
-            
+
             startingPosition = transform.position;
 
             newDay = false;
@@ -51,15 +51,18 @@ namespace Tesla.CharacterControllers
                 {
                     ResetValues();
                 }
-                
+
                 currentAnimationCurve = Tween.EaseInOut;
-                
+
                 if (!gameScript.isFishing)
                 {
                     if (controls.GetMouseButtonDown(0))
                     {
-                        MoveTo(controls.GetMouseWorldPosition(), currentAnimationCurve);
-                    }    
+                        if (!gameScript.fishStack.hasMouseOver)
+                        {
+                            MoveTo(controls.GetMouseWorldPosition(), currentAnimationCurve);
+                        }
+                    }
                 }
 
                 // Take away control is player is fishing
@@ -68,28 +71,31 @@ namespace Tesla.CharacterControllers
                     Tween.Stop(transform.GetInstanceID());
                 }
             }
-            
-            else if (mainGameScript.gameState == GameState.Returning) 
+
+            else if (mainGameScript.gameState == GameState.Returning)
             {
                 currentAnimationCurve = Tween.EaseOut;
-                
+
                 if (controls.GetMouseButtonDown(0))
                 {
-                    MoveTo(controls.GetMouseWorldPosition(), currentAnimationCurve);
+                    if (!gameScript.fishStack.hasMouseOver)
+                    {
+                        MoveTo(controls.GetMouseWorldPosition(), currentAnimationCurve);
+                    }
                 }
             }
-            
+
             else if (mainGameScript.gameState == GameState.Selling)
             {
                 newDay = true;
             }
-            
-            else if (mainGameScript.gameState == GameState.Menu) 
+
+            else if (mainGameScript.gameState == GameState.Menu)
             {
                 newDay = true;
             }
         }
-        
+
         void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag("Wall"))
@@ -106,7 +112,7 @@ namespace Tesla.CharacterControllers
         void MoveTo(Vector2 destination, AnimationCurve animationCurve)
         {
             float trueSpeed = speed - gameScript.currentWeight / weightSlowdownFactor;
-            
+
             float distance = Vector3.Distance(transform.position, destination);
             float time = distance / trueSpeed;
 

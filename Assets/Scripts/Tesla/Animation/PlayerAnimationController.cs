@@ -58,8 +58,7 @@ namespace Tesla.Animation
             waterMask.transform.localPosition = new Vector3(waterMask.transform.localPosition.x, 
                 waterMaskYPosition, waterMask.transform.localPosition.z);
 
-            previousWaterLevel = gameScript.waterLevel;   
-            
+            previousWaterLevel = gameScript.waterLevel;
         }
     }
 }

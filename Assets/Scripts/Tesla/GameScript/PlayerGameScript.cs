@@ -1,5 +1,6 @@
 using System.Collections;
 using Tesla.Animation;
+using Tesla.Audio;
 using Tesla.Controls;
 using Tesla.UI;
 using UnityEngine;
@@ -11,9 +12,12 @@ namespace Tesla.GameScript
         MouseControls controls;
         FishMeterNeedle fishMeterNeedle;
 
+        AudioPlayer audioPlayer;
         MainGameScript mainGameScript;
         FishSchoolGameScript currentFishSchool;
-        FishStack fishStack;
+        public FishStack fishStack;
+        
+        public Animator waterSplashAnimator;
 
         public float fishingMeterTolerance = 0.2f;
         public float weightDamageFactor = 8.0f;
@@ -36,6 +40,7 @@ namespace Tesla.GameScript
             controls = GetComponent<MouseControls>();
             fishMeterNeedle = FindObjectOfType<FishMeterNeedle>();
 
+            audioPlayer = FindObjectOfType<AudioPlayer>();
             mainGameScript = FindObjectOfType<MainGameScript>();
             fishStack = GetComponentInChildren<FishStack>();
 
@@ -79,6 +84,18 @@ namespace Tesla.GameScript
                 if (waterLevel >= 1.0f)
                 {
                     Sink();
+                }
+                
+                if (fishStack.hasMouseOver && controls.GetMouseButtonDown(0))
+                {
+                    waterSplashAnimator.SetTrigger("Splash");
+                    audioPlayer.PlaySound(audioPlayer.splash);
+                    currentWeight -= 1.0f;
+
+                    if (currentWeight < 0.0f)
+                    {
+                        currentWeight = 0.0f;
+                    }
                 }
 
                 waterLevel = Mathf.Clamp(waterLevel, 0.0f, 2.7f);
@@ -162,6 +179,8 @@ namespace Tesla.GameScript
                 {
                     currentWeight += currentFishSchool.weight;
                     Debug.Log($"Successfully fished a {currentFishSchool.weight:F2}kg. fish!");
+                    
+                    audioPlayer.PlaySound(audioPlayer.fished);
                 }
                 else
                 {

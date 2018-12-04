@@ -1,5 +1,6 @@
 using System.Collections;
 using Pixelplacement;
+using Tesla.Audio;
 using Tesla.CharacterControllers;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Tesla.GameScript
     public class EnemyGameScript : BaseGameScript
     {
         MainGameScript mainGameScript;
+        AudioPlayer audioPlayer;
 
         EnemyCharacterController characterController;
 
@@ -20,6 +22,7 @@ namespace Tesla.GameScript
         void Start()
         {
             mainGameScript = FindObjectOfType<MainGameScript>();
+            audioPlayer = FindObjectOfType<AudioPlayer>();
 
             characterController = GetComponent<EnemyCharacterController>();
 
@@ -64,6 +67,8 @@ namespace Tesla.GameScript
         {
             if (other.gameObject.CompareTag("Player"))
             {
+                audioPlayer.PlaySound(audioPlayer.enemy);
+                
                 // Can't damage anymore this round
                 StartCoroutine(StopDamaging(0.5f));
             }

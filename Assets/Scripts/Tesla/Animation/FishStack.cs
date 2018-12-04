@@ -10,7 +10,7 @@ namespace Tesla.Animation
         PlayerAnimationController playerAnimationController;
 
         new SpriteRenderer renderer;
-
+        
         public SpriteMask spriteMask;
         public List<Sprite> sprites;
 

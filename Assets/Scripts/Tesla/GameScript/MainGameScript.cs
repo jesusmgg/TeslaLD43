@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Tesla.Audio;
 using Tesla.UI;
 using Tesla.UI.MainMenu;
 using UnityEngine;
@@ -12,12 +13,14 @@ namespace Tesla.GameScript
         InfoPanel infoPanel;
         SellingPanel sellingPanel;
         MainMenu mainMenu;
+        AudioPlayer audioPlayer;
 
         public GameState gameState;
 
         public int currentDay;
         public int money;
         public string playerName = "Tesla";
+        public int highScore;
 
         [Header("Fishing")]
         public GameObject fishSchoolPrefab;
@@ -35,6 +38,7 @@ namespace Tesla.GameScript
             infoPanel = FindObjectOfType<InfoPanel>();
             sellingPanel = FindObjectOfType<SellingPanel>();
             mainMenu = FindObjectOfType<MainMenu>();
+            audioPlayer = FindObjectOfType<AudioPlayer>();
 
             gameState = GameState.Menu;
             
@@ -46,6 +50,10 @@ namespace Tesla.GameScript
             
             currentDay = 0;
             money = 0;
+
+            highScore = PlayerPrefs.GetInt("HighScore", 0);
+            
+            audioPlayer.StartAmbiance();
         }
 
         void ResetValues()
@@ -62,16 +70,13 @@ namespace Tesla.GameScript
         {
             if (gameState == GameState.Fishing)
             {
-                if (currentDay == 0)
+                if (tutorialProgress == 0)
                 {
-                    if (tutorialProgress == 0)
-                    {
-                        string message = "Day 1 of 3\n\nClick on a fish school to start fishing.";
-                        infoPanel.AddMessage(message);
+                    string message = "Day 1 of 3\n\nClick on a fish school to start fishing.";
+                    infoPanel.AddMessage(message);
 
-                        tutorialProgress = 1;
-                    }   
-                }
+                    tutorialProgress = 1;
+                } 
                 
                 fishingTimeLeft -= Time.deltaTime;
 
@@ -95,21 +100,18 @@ namespace Tesla.GameScript
             
             else if (gameState == GameState.Returning)
             {
-                if (currentDay == 0)
+                if (tutorialProgress == 1)
                 {
-                    if (tutorialProgress == 1)
-                    {
-                        string message = "Return to the dock to sell your fish.\n\nBeware the crocodiles at the river.";
-                        infoPanel.AddMessage(message);
+                    string message = "Return to the dock to sell your fish.\n\nBeware the crocodiles at the river.";
+                    infoPanel.AddMessage(message);
                     
-                        message = "Drop fish by clicking them in your boat\n(to move faster and delay sinking).";
-                        infoPanel.AddMessage(message);
+                    message = "Drop fish by clicking them in your boat\n(to move faster and delay sinking).";
+                    infoPanel.AddMessage(message);
 
-                        tutorialProgress = 2;
-                    }
+                    tutorialProgress = 2;
                 }
                 
-                if (playerGameScript.isDocked)
+                if (playerGameScript.isDocked || playerGameScript.waterLevel >= 1.0f)
                 {
                     gameState = GameState.Selling;
                 }
@@ -121,6 +123,8 @@ namespace Tesla.GameScript
                 {
                     money += (int) (playerGameScript.currentWeight * 10.0f);
                     currentDay++;
+                    
+                    audioPlayer.PlaySound(audioPlayer.endOfTheDay);
 
                     endOfDayDone = true;
                 }
@@ -131,6 +135,15 @@ namespace Tesla.GameScript
                     {
                         // End game
                         gameState = GameState.Menu;
+                        
+                        audioPlayer.StopMusic();
+
+                        if (money > highScore)
+                        {
+                            highScore = money;
+                            PlayerPrefs.SetInt("HighScore", highScore);
+                        }
+                        
                         ResetValues();
                     }
                     else

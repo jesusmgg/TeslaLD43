@@ -1,3 +1,4 @@
+using Tesla.Audio;
 using Tesla.GameScript;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,12 +8,16 @@ namespace Tesla.UI.MainMenu
     public class MainMenu : MonoBehaviour
     {
         MainGameScript mainGameScript;
+        AudioPlayer audioPlayer;
+
+        public Text highScoreText;
         
         public bool startClicked;
 
         void Start()
         {
             mainGameScript = FindObjectOfType<MainGameScript>();
+            audioPlayer = FindObjectOfType<AudioPlayer>();
             
             startClicked = false;
         }
@@ -25,6 +30,9 @@ namespace Tesla.UI.MainMenu
         public void OnStartButton()
         {
             startClicked = true;
+            audioPlayer.PlaySound(audioPlayer.click);
+            
+            audioPlayer.StartMusic();
         }
         
         public void SetVisible(bool visible)
@@ -45,7 +53,7 @@ namespace Tesla.UI.MainMenu
         {
             if (mainGameScript.gameState == GameState.Menu)
             {
-                
+                highScoreText.text = $"Best run: ${mainGameScript.highScore}";
             }
             else if (mainGameScript.gameState == GameState.Fishing)
             {

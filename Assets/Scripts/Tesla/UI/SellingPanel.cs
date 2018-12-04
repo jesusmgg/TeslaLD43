@@ -1,3 +1,4 @@
+using Tesla.Audio;
 using Tesla.GameScript;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ namespace Tesla.UI
     {
         MainGameScript mainGameScript;
         PlayerGameScript playerGameScript;
+        AudioPlayer audioPlayer;
 
         public Text titleText;
         public Text fishedText;
@@ -21,6 +23,7 @@ namespace Tesla.UI
         {
             mainGameScript = FindObjectOfType<MainGameScript>();
             playerGameScript = FindObjectOfType<PlayerGameScript>();
+            audioPlayer = FindObjectOfType<AudioPlayer>();
 
             nextDayClicked = false;
         }
@@ -28,6 +31,7 @@ namespace Tesla.UI
         public void OnNextDayButton()
         {
             nextDayClicked = true;
+            audioPlayer.PlaySound(audioPlayer.click);
         }
 
         public void SetVisible(bool visible)
@@ -55,31 +59,31 @@ namespace Tesla.UI
                 if (playerGameScript.waterLevel >= 1.0f)
                 {
                     fishedText.text = "Your boat sunk. Bad luck.";
-                    moneyText.text = $"You've made no money today (total:${mainGameScript.money}.";
+                    moneyText.text = $"You've made no money today (total:${mainGameScript.money}).";
                 }
                 
                 else if (playerGameScript.currentWeight <= 1.0f)
                 {
-                    fishedText.text = $"You've fished {playerGameScript.currentWeight:F2}kg.";
-                    moneyText.text = $"You've made ${earnings} today (total:${mainGameScript.money}).";
+                    fishedText.text = $"Bad day. You've fished {playerGameScript.currentWeight:F2}kg.";
+                    moneyText.text = $"You've made ${earnings} today (total: ${mainGameScript.money}).";
                 }
                 
                 else if (playerGameScript.currentWeight <= 3.0f)
                 {
                     fishedText.text = $"Good job! You've fished {playerGameScript.currentWeight:F2}kg.";
-                    moneyText.text = $"You've made ${earnings} today (total:${mainGameScript.money}).";
+                    moneyText.text = $"You've made ${earnings} today (total: ${mainGameScript.money}).";
                 }
                 
                 else if (playerGameScript.currentWeight <= 8.0f)
                 {
                     fishedText.text = $"Well done! You've fished {playerGameScript.currentWeight:F2}kg.";
-                    moneyText.text = $"You've made ${earnings} today (total:${mainGameScript.money}).";
+                    moneyText.text = $"You've made ${earnings} today (total: ${mainGameScript.money}).";
                 }
                 
                 else
                 {
                     fishedText.text = $"Outstanding! You've fished {playerGameScript.currentWeight:F2}kg.";
-                    moneyText.text = $"You've made ${earnings} today! (Total:${mainGameScript.money}).";
+                    moneyText.text = $"You've made ${earnings} today! (Total: ${mainGameScript.money}).";
                 }
                 
                 buttonText.text = "Next Day";

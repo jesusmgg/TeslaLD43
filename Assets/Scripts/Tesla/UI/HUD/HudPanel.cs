@@ -5,6 +5,7 @@ namespace Tesla.UI.HUD
 {
     public class HudPanel : MonoBehaviour
     {
+        // Horribly rushed method that kills alpha values (repeated in other panels too)
         public void SetVisible(bool visible)
         {
             float alpha = visible ? 1.0f : 0.0f;
