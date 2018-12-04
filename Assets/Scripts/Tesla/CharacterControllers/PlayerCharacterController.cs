@@ -39,7 +39,6 @@ namespace Tesla.CharacterControllers
         void ResetValues()
         {
             transform.position = startingPosition;
-
             newDay = false;
         }
 
@@ -104,7 +103,11 @@ namespace Tesla.CharacterControllers
 
                 if (gameScript.waterLevel < 1.0f)
                 {
-                    MoveTo((Vector2) transform.position - direction, Tween.EaseInOut);
+                    if (mainGameScript.gameState == GameState.Fishing ||
+                        mainGameScript.gameState == GameState.Returning)
+                    {
+                        MoveTo((Vector2) transform.position - direction, Tween.EaseInOut);
+                    }
                 }
             }
         }

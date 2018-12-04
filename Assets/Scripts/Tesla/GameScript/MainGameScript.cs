@@ -105,7 +105,7 @@ namespace Tesla.GameScript
                     string message = "Return to the dock to sell your fish.\n\nBeware the crocodiles at the river.";
                     infoPanel.AddMessage(message);
                     
-                    message = "Drop fish by clicking them in your boat\n(to move faster and delay sinking).";
+                    message = "Drop fish by clicking it in your boat\n(to move faster and delay sinking).";
                     infoPanel.AddMessage(message);
 
                     tutorialProgress = 2;
@@ -148,6 +148,9 @@ namespace Tesla.GameScript
                     }
                     else
                     {
+                        audioPlayer.StopMusic();
+                        audioPlayer.StartMusic(audioPlayer.sailingMusic);
+                        
                         gameState = GameState.Fishing;  
                         fishingTimeLeft = fishingTime;
                     }

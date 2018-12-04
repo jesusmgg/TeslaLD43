@@ -32,7 +32,8 @@ namespace Tesla.UI.MainMenu
             startClicked = true;
             audioPlayer.PlaySound(audioPlayer.click);
             
-            audioPlayer.StartMusic();
+            audioPlayer.StopMusic();
+            audioPlayer.StartMusic(audioPlayer.sailingMusic);
         }
         
         public void SetVisible(bool visible)

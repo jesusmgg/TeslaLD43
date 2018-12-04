@@ -67,7 +67,8 @@ namespace Tesla.GameScript
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                audioPlayer.PlaySound(audioPlayer.enemy);
+                audioPlayer.StopMusic();
+                audioPlayer.StartMusic(audioPlayer.enemyMusic);
                 
                 // Can't damage anymore this round
                 StartCoroutine(StopDamaging(0.5f));

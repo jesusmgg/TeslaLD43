@@ -83,6 +83,7 @@ namespace Tesla.GameScript
 
                 if (waterLevel >= 1.0f)
                 {
+                    currentWeight = 0.0f;
                     Sink();
                 }
                 

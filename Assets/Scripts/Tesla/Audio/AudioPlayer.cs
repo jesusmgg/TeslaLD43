@@ -7,11 +7,11 @@ namespace Tesla.Audio
         [Header("Music and ambiance")]
         public AudioClip sailingMusic;
         public AudioClip sailingAmbiance;
+        public AudioClip enemyMusic;
 
         [Header("UI Effects")]
         public AudioClip click;
         public AudioClip endOfTheDay;
-        public AudioClip enemy;
         public AudioClip fished;
         public AudioClip splash;
 
@@ -33,9 +33,9 @@ namespace Tesla.Audio
             audioSource.PlayOneShot(clip);
         }
 
-        public void StartMusic()
+        public void StartMusic(AudioClip clip)
         {
-            musicPlayer.clip = sailingMusic;
+            musicPlayer.clip = clip;
             musicPlayer.loop = true;
             musicPlayer.Play();
         }
